@@ -1,0 +1,50 @@
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Product } from '../../model/product';
+import { ProductsService } from '../../service/products.service';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-products',
+  imports: [CommonModule],
+  templateUrl: './products.component.html',
+  styleUrl: './products.component.css'
+})
+
+export class ProductsComponent {
+
+  // Observable is a type to handle asynchronous data streams
+  products:Observable<Product[]> | any;
+  message:string='';
+
+  constructor(private productService: ProductsService,
+      private router: Router ) { }
+  
+      // Angular life Cycle Methods ngOnInit() - Invoked when component is initialised
+      ngOnInit(): void{
+        this.reloadData();
+      }
+
+      reloadData(){
+        this.productService.getProductList().subscribe({
+          next: (data) => {
+            this.products = data; // Assign the plain data, no need for async pipe in the template
+          },
+          error: (err) => {
+            console.error('Error fetching product list:', err.message);
+          }
+        });
+      }
+
+      addProduct():void{
+        this.router.navigate(['/add-product/_add']);
+      }
+      editProduct(pid:number):void{
+        this.router.navigate(['/add-product/',pid]);
+      }
+      productDetails(pid:number):void{
+        this.router.navigate(['/product-details/',pid]);
+      }
+
+ 

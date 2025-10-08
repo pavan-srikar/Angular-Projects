@@ -1,0 +1,12 @@
+
+#about{
+    background-color:darksalmon;
+    width: 1000px;
+    height: 500px;
+    text-align: center;
+    margin: auto;
+    padding-top: 25px;
+}
+
+h2{color: crimson;}
+p{color: green;font-weight: bolder;}
