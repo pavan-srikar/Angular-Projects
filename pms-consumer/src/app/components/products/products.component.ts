@@ -47,4 +47,21 @@ export class ProductsComponent {
         this.router.navigate(['/product-details/',pid]);
       }
 
- 
+      deleteProduct(pid:number):void{
+        this.productService.deleteProduct(pid).subscribe({
+          next: () => {
+            this.message = 'Product deleted successfully.';
+            setTimeout(() => {
+              this.message = '';
+              this.reloadData();  // Refresh products list after deletion
+            }, 2000);  // Clear the message after 2 seconds
+          },
+          error: (err) => {
+            console.error('Error deleting product:', err.message);  // Handle the error
+            this.message = 'Error deleting product. Please try again later.';
+          }
+        });
+      }
+
+      
+}

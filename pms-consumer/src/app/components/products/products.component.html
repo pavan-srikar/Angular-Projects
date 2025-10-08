@@ -29,7 +29,16 @@
              }}</td>
             <td>
                <button (click)="productDetails(product.pid)" class="btn btn-primary" style="margin-left: 10px">Details</button>
-               
+                <button (click)="editProduct(product.pid)" class="btn btn-success" style="margin-left: 10px">Update</button>
+                 
+                <button (click)="deleteProduct(product.pid)" class="btn btn-danger" style="margin-left: 10px">Delete</button> 
+
             </td>
             
-          </tr>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+   
+    <div *ngIf="message" class="alert alert-success">{{ message }}</div>
+  </div>

@@ -65,5 +65,28 @@ export class ProductsService {
       catchError(this.handleError1)  // Handle errors
     );
   }
+   deleteProduct(pid:number):Observable<any>{
+    return this.http.delete(this.baseURL + '/' + pid,{responseType:'text'})
+    .pipe(
+      catchError(this.handleError1)  // Handle errors
+    );
+  }
+
+
+  baseURL2= 'http://localhost:8088/producthive/api'
+
+    // Angular service method
+  searchProductByName(name: string): Observable<any> {
+    const url = `${this.baseURL2}/search?name=${name}`;
+    return this.http.get(url).pipe(
+      catchError(this.handleError) // Handle errors if any
+    );
+  }
+
+  // Error handling
+  private handleError(error: HttpErrorResponse) {
+    console.error('Error searching for products:', error);
+    return throwError(() => new Error('Error searching for products'));
+  }
 
 }
